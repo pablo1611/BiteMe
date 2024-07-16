@@ -4,13 +4,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="282.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BMgui.ClientConnectionController">
+<AnchorPane prefHeight="282.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BMgui.ClientConnectionController">
     <children>
-        <TextField fx:id="txtServerAddress" editable="false" layoutX="116.0" layoutY="58.0" promptText="Server Address" text="localhost" />
         <TextField fx:id="txtPortNumber" layoutX="116.0" layoutY="141.0" promptText="Port Number" />
         <Button fx:id="btnConnect" layoutX="239.0" layoutY="197.0" onAction="#connectButtonClicked" prefHeight="45.0" prefWidth="107.0" text="Connect" />
         <Button fx:id="btnExit" layoutX="56.0" layoutY="196.0" onAction="#exitButtonClicked" prefHeight="46.0" prefWidth="107.0" text="Exit" />
       <TextField alignment="CENTER" layoutX="137.0" layoutY="24.0" prefHeight="26.0" prefWidth="107.0" text="username" />
       <TextField alignment="CENTER" layoutX="137.0" layoutY="105.0" prefHeight="26.0" prefWidth="107.0" text="port" />
+      <TextField fx:id="txtServerAddress"  layoutX="116.0" layoutY="69.0" promptText="Server Address" />
     </children>
 </AnchorPane>

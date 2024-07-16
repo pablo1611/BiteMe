@@ -38,8 +38,8 @@ public class ClientConnectionController extends AbstractController {
     @FXML
     public void initialize() {
         // Set default value for server address and make it non-editable
-        txtServerAddress.setText("localhost");
-        txtServerAddress.setEditable(false);
+        //txtServerAddress.setText("localhost");
+        //txtServerAddress.setEditable(false);
     }
 
     @FXML
