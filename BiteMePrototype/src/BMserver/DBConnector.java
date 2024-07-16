@@ -15,8 +15,8 @@ public class DBConnector {
     private Connection conn;
     private static final String URL = "jdbc:mysql://localhost:3306/biteme?serverTimezone=IST";
     private static final String USER = "root";
-    private static final String PASSWORD = "Pablo1998"; // replace with your MySQL password
-    //private static final String PASSWORD = "Aa123456";
+    //private static final String PASSWORD = "Pablo1998"; // replace with your MySQL password
+    private static final String PASSWORD = "Aa123456";
 
     public void connectToDB() {
         try {
