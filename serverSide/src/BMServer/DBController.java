@@ -20,7 +20,7 @@ public class DBController {
      * @param : host is the host (ip) of the sever's database
      * @param schema : the name of the schema in the database
      * @param userName : the user name of the database
-     * @param password : user's password
+     * @param password : db user's password
      */
     public DBController(String host, String schema, String userName, String password) {
         try {
