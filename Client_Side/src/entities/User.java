@@ -1,11 +1,32 @@
 package entities;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+    private String userName;
+    private String password;
     private int id;
     private String name;
     private String phone;
     private String address;
     private String role;//we need to decide how to use it
+    private String permission;
+    private String email;
+
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+        permission = "";
+
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     // Getters and Setters
     public int getId() {
@@ -47,5 +68,32 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public String getPermission() {
+        return permission;
+    }
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    @Override
+    public String toString() {
+        return  userName + "," + password + "," + permission ;
+    }
+
 }
 

@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module clientSide {
-	requires OCSF;
-}
