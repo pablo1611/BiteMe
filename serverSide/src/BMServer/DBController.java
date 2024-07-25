@@ -1,3 +1,4 @@
+package BMServer;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -8,24 +9,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class serverDB {
+public class DBController {
 
     static Connection conn;
     static Statement stmt;
     static PreparedStatement pstmt;
-
-    public serverDB() {
-        connectToDB();
-    }
-
-    public static void connectToDB() {
+    
+    /**
+     * 
+     * @param : host is the host (ip) of the sever's database
+     * @param schema : the name of the schema in the database
+     * @param userName : the user name of the database
+     * @param password : user's password
+     */
+    public DBController(String host, String schema, String userName, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception ex) {
             System.out.println("Driver definition failed");
         }
+
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/biteme?serverTimezone=IST", "root", "aA123456");
+            String url = "jdbc:mysql://" + host + "/" + schema + "?serverTimezone=IST";
+            conn = DriverManager.getConnection(url, userName, password);
             stmt = conn.createStatement();
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
@@ -33,29 +39,27 @@ public class serverDB {
             System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
+    
+
     /**
      * Checks if a user exists in the database.
      *
      * @param userName - The username(String) to check.
      * @return true if the user exists, false otherwise.
      */
-    public boolean checkIfUserExsit(String userName) {
-        String result;
-        String query = "SELECT UserName FROM users";
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                String id = rs.getString("UserName");
-                if (id.equals(userName)) {
-                    return true;
+    public boolean checkIfUserExists(String userName) {
+        String query = "SELECT 1 FROM users WHERE userName = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, userName);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return true; // User exists
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return false; // User does not exist
     }
 
 
@@ -71,6 +75,12 @@ public class serverDB {
             e.printStackTrace();
         }
     }
+    
+    /*
+    public void userLogout(User user) {
+    	
+    }
+    */
 
 }
 
