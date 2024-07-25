@@ -2,6 +2,9 @@
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com
 
+import common.RequestType;
+import entities.Request;
+import entities.User;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -53,7 +56,47 @@ public class EchoServer extends AbstractServer
    */
   public void handleMessageFromClient  (Object msg, ConnectionToClient client)
   {
+    Request message;
+    Request request = new Request();
+    if (msg == null) {
+      try {
+        client.sendToClient(null);
+      } catch (Exception e) {};
+    }
+    try {
+      message = Request.fromBytesToObject((byte[]) msg);
+      System.out.println(message.toString());
 
+//			if (msg instanceof Request) {
+      System.out.println(message.toString());
+      System.out.println(message.getType().toString());
+      switch (message.getType()) {
+        case USER_LOGIN:
+          try {
+            User user = (User) message.getRequest();
+            System.out.println(user.toString());
+            request.setRequest(serverDB.userLogin(user));
+            System.out.println(user.toString());
+            request.setType(RequestType.USER_LOGIN);
+            byte[] arr;
+            try {
+              arr = request.getBytes();
+              System.out.println("Serialized bytes: " + arr.length);
+              client.sendToClient(arr);
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          } catch (Exception e) {
+          };
+
+      }
+    }catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (ClassNotFoundException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
   }
    
   /**
