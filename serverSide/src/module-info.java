@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module serverSide {
-	requires OCSF;
-}

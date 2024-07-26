@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="BiteMePrototype/src"/>
+	<classpathentry excluding="src/" kind="src" path="Client_Side"/>
+	<classpathentry kind="src" path="Client_Side/src"/>
+	<classpathentry kind="src" path="clientSide/src"/>
+	<classpathentry kind="src" path="OCSF/src"/>
+	<classpathentry kind="src" path="serverSide/src"/>
+	<classpathentry kind="output" path="BiteMePrototype/bin"/>
+</classpath>

@@ -36,5 +36,5 @@ public class MainMenuController {
     @FXML
     void handleExit(ActionEvent event) {
         // Handle exit
-}
+    }
 }

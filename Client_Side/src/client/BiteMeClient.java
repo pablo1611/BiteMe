@@ -1,4 +1,4 @@
-package controllers;
+package client;
 
 import java.io.BufferedInputStream;
 import java.io.File;
