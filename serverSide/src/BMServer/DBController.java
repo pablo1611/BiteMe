@@ -33,7 +33,6 @@ public class DBController {
         }
     }
 
-
     public static void closeDBconnection() {
         try {
             if (pstmt != null) pstmt.close();
