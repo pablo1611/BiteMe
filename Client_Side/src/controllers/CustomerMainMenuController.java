@@ -51,8 +51,8 @@ public class CustomerMainMenuController implements Initializable {
      */
     @FXML
 	void Exit (ActionEvent event) throws IOException {
-		ClientUI.client.closeConnection();
-    	ClientUI.client.quit();
+		ClientUI.chat.closeConnection();
+    	ClientUI.chat.quit();
 	}
     /**
      * Navigates to the page for creating a reservation. 

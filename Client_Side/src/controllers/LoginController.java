@@ -1,5 +1,4 @@
 package controllers;
-import client.ClientController;
 import client.ClientUI;
 import common.RequestType;
 import entities.Request;
@@ -18,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+
 
 /**
  * Controller class for the Worker Login Page.
@@ -52,6 +52,8 @@ public class LoginController {
 
     @FXML
     private TextField txtFUserName;
+
+	boolean flag;
     /**
      * Exits the application.
      * This method is triggered when the Exit button is pressed.
@@ -115,19 +117,19 @@ public class LoginController {
 		Request request= new Request();
 		request.setType(RequestType.USER_LOGIN);
 		request.setRequest(user);
-		System.out.println(request.getRequest().toString());
+		System.out.println(request.getRequest().toString()); //print the request+type of request
 		byte[] arr;
 		try {
 			arr = request.getBytes();
 			System.out.println("Serialized bytes: " + arr.length);
-			ClientUI.client.handleMessageFromClientUI(arr);
+			ServerIpController.clientController.getClient().handleMessageFromClientUI(arr);
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(ClientUI.client.user.toString());
-		user=ClientUI.client.user;
-		switch (ClientUI.client.user.getPermission()) {
+		System.out.println(	ServerIpController.clientController.getClient().user.toString());
+		user= ServerIpController.clientController.getClient().user;
+		switch (ServerIpController.clientController.getClient().user.getPermission()) {
 
 		case "Password invalid":
 			lblInvalidPW.setVisible(true);
@@ -135,9 +137,11 @@ public class LoginController {
 		case "ID not registered":
 			lblIDnr.setVisible(true);
 			break;
-		case "Connected":
-			lblconnected.setVisible(true);
-			break;	
+			case "Connected":
+				lblconnected.setVisible(true);
+				User loggedInUser = ServerIpController.clientController.getClient().user;
+				openAppropriateMenu(event, loggedInUser);
+				break;
 //		case "USER":
 //			ParkManagerController.user=user;
 //			((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
@@ -181,23 +185,34 @@ public class LoginController {
 //			break;
 		}
     }
-    /**
-     * Initializes the login view for workers.
-     * This method is the entry point for the Worker Login GUI, setting up necessary UI components.
-     *
-     * @param primaryStage The primary stage for this application.
-     * @throws Exception if an error occurs during loading the FXML.
-     */
 
-    public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/Login.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/gui/Login.css").toExternalForm());
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setTitle("");
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
-	} 
 
+	private void openAppropriateMenu(ActionEvent event, User user) {
+		try {
+			String fxmlFile;
+			String cssFile;
+
+//			if (user.getRole().equalsIgnoreCase("Manager")) {
+//				fxmlFile = "/gui/ManagerMainMenu.fxml";
+//				cssFile = "/gui/ManagerMainMenu.css";
+//			} else {
+				fxmlFile = "/gui/CustomerMainMenu.fxml";
+				cssFile = "/gui/CustomerMainMenu.css";
+//			}
+
+			((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+			Stage primaryStage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+			Scene scene = new Scene(root);
+		//	scene.getStylesheets().add(getClass().getResource(cssFile).toExternalForm());
+			primaryStage.initStyle(StageStyle.UNDECORATED);
+			primaryStage.setTitle("");
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			// Handle the exception (e.g., show an error message to the user)
+		}
+	}
 }

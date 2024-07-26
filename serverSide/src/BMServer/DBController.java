@@ -66,13 +66,15 @@ public class DBController {
     }
 
     public User userLogin(User user) {
-        String query = "SELECT UserPassword, ConnectionStatus FROM Users WHERE UserID = ?";
+        String query = "SELECT Password, Status FROM Users WHERE Username = ?";
+        String updateQuery = "UPDATE Users SET Status = 'Connected' WHERE Username = ?";
+
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, user.getUserName());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    String password = rs.getString("UserPassword");
-                    String connectionStatus = rs.getString("ConnectionStatus");
+                    String password = rs.getString("Password");
+                    String connectionStatus = rs.getString("Status");
 
                     if (!password.equals(user.getPassword())) {
                         user.setPermission("Password invalid");
@@ -80,18 +82,28 @@ public class DBController {
                     }
 
                     if (connectionStatus.equals("Connected")) {
-                        user.setPermission("Connected");
+                        user.setPermission("Already connected");
                         return user;
+                    }
+
+                    // If we reach here, the login is successful
+                    try (PreparedStatement updatePs = conn.prepareStatement(updateQuery)) {
+                        updatePs.setString(1, user.getUserName());
+                        int updatedRows = updatePs.executeUpdate();
+
+                        if (updatedRows > 0) {
+                            user.setPermission("Connected");
+                        } else {
+                            user.setPermission("Error updating connection status");
+                        }
                     }
                 } else {
                     user.setPermission("User not found");
-                    return user;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             user.setPermission("Error during login");
-            return user;
         }
         return user;
     }
@@ -102,7 +114,7 @@ public class DBController {
      * @param user - The User object to log out.
      */
     public void userLogout(User user) {
-        String query = "UPDATE Users SET ConnectionStatus = 'Disconnected' WHERE UserID = ?";
+        String query = "UPDATE Users SET Status = 'Disconnected' WHERE Username = ?";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, user.getUserName());
             ps.executeUpdate();

@@ -34,7 +34,7 @@ public class Request implements Serializable {
 	    public String toString() {
 	        return "Request{" +
 	                "request=" + request +
-	                ", type=" + type +
+	                "type=" + type +
 	                '}';
 	    }
 	 /**

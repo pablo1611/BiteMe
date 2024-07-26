@@ -2,7 +2,6 @@ package client;
 
 import controllers.ServerIpController;
 import common.ChatIF;
-import controllers.LoginClientVerificationController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -10,8 +9,8 @@ import javafx.stage.Stage;
 
 public class ClientUI extends Application implements ChatIF {
 
-	public static ClientController chat; //only one instance
-	public static ChatClient client;
+	//public static ClientController chat; //only one instance
+	public static ChatClient chat;
 	public static String host;
 
 	
