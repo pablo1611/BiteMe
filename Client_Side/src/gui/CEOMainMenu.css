@@ -1,0 +1,19 @@
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 40px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.text {
+    -fx-fill: #333333;
+}

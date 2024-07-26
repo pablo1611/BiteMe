@@ -65,8 +65,9 @@ public class DBController {
         return false;
     }
 
+
     public User userLogin(User user) {
-        String query = "SELECT Password, Status FROM Users WHERE Username = ?";
+        String query = "SELECT Password, Status, Role FROM Users WHERE Username = ?";
         String updateQuery = "UPDATE Users SET Status = 'Connected' WHERE Username = ?";
 
         try (PreparedStatement ps = conn.prepareStatement(query)) {
@@ -75,6 +76,7 @@ public class DBController {
                 if (rs.next()) {
                     String password = rs.getString("Password");
                     String connectionStatus = rs.getString("Status");
+                    String role = rs.getString("Role");
 
                     if (!password.equals(user.getPassword())) {
                         user.setPermission("Password invalid");
@@ -93,6 +95,7 @@ public class DBController {
 
                         if (updatedRows > 0) {
                             user.setPermission("Connected");
+                            user.setRole(role);  // Set the user's role
                         } else {
                             user.setPermission("Error updating connection status");
                         }
@@ -113,14 +116,17 @@ public class DBController {
      *
      * @param user - The User object to log out.
      */
-    public void userLogout(User user) {
+
+    public boolean userLogout(User user) {
         String query = "UPDATE Users SET Status = 'Disconnected' WHERE Username = ?";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, user.getUserName());
-            ps.executeUpdate();
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
-
 }
+

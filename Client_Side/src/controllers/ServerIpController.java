@@ -23,7 +23,7 @@ import java.io.IOException;
 public class ServerIpController extends Application {
 	public static String IP;
 	public static int Port;
-	public static ClientController clientController;
+
     @FXML
     private Button btnIP;
 
@@ -50,24 +50,20 @@ public class ServerIpController extends Application {
      * @param event The event that triggered this action.
      * @throws Exception if an error occurs during connection or scene transition.
      */
-    public void getIP(ActionEvent event) throws Exception{
+	public void getIP(ActionEvent event) throws Exception {
+		try {
+			IP = txtIP.getText();
+			Port = Integer.parseInt(txtPortNumber.getText());
 
-    	try
-	    {
-    		IP=txtIP.getText();
-    		Port=Integer.parseInt(txtPortNumber.getText());
+			System.out.println(Port);
+			System.out.println(IP);
+			ClientUI.host = IP;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			ClientUI.host = "localhost-default";
+		}
 
-    		System.out.println(Port);
-    		System.out.println(IP);
-    		ClientUI.host=IP;
-	    }
-	    catch(ArrayIndexOutOfBoundsException e)
-	    {
-	    	ClientUI.host = "localhost-default";
-	    }
-
-		clientController = new ClientController(IP, Port);
-		((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
+		ClientUI.initializeClient(IP, Port);
+		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/Login.fxml"));
 
@@ -77,8 +73,7 @@ public class ServerIpController extends Application {
 
 		primaryStage.setResizable(false);
 		primaryStage.show();
-
-    }
+	}
     /**
      * Initializes and shows the primary stage for setting the server IP and port.
      * @param primaryStage The primary stage for this application.

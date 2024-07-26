@@ -1,4 +1,5 @@
 package controllers;
+import client.ChatClient;
 import client.ClientUI;
 import common.RequestType;
 import entities.Request;
@@ -40,10 +41,7 @@ public class LoginController {
     
     @FXML
     private Label lblInvalidPW;
-    
-    @FXML
-    private Label lblIDnr;
-    
+
     @FXML
     private Label lblconnected;
 
@@ -63,10 +61,11 @@ public class LoginController {
      */
 	@FXML
 	void Exit(ActionEvent event) throws IOException {
-		if (ServerIpController.clientController != null) {
+		ChatClient client = ClientUI.getClient();
+		if (client != null) {
 			try {
-				ServerIpController.clientController.getClient().closeConnection();
-				ServerIpController.clientController.getClient().quit();
+				client.closeConnection();
+				client.quit();
 			} catch (Exception e) {
 				System.out.println("Error while closing connection: " + e.getMessage());
 			}
@@ -74,6 +73,7 @@ public class LoginController {
 		// Close the application
 		System.exit(0);
 	}
+
     /**
      * Navigates back to the Welcome Page.
      * This method is triggered when the Back button is pressed.
@@ -86,8 +86,8 @@ public class LoginController {
     	((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerIP.fxml"));
-		
-		
+
+
 		Scene scene = new Scene(root);			
 		scene.getStylesheets().add(getClass().getResource("/gui/ServerIP.css").toExternalForm());
 		primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -95,8 +95,8 @@ public class LoginController {
 		primaryStage.setResizable(false);
 			
 		primaryStage.show();
-	
-	
+
+
     }
     /**
      * Attempts to log in a worker.
@@ -107,11 +107,16 @@ public class LoginController {
      * @param event The action event that triggered this method.
      * @throws IOException If an error occurs during the process.
      */
+
+
     @FXML
     void Login(ActionEvent event) throws IOException {
-		String id=txtFUserName.getText();
+
+		String username=txtFUserName.getText();
 		String password=txtFPassword.getText();
-		User user = new User(id,password);
+		User user = new User(username,password);
+
+		ChatClient client=ClientUI.getClient();
 
 		//send to server:
 		Request request= new Request();
@@ -122,89 +127,49 @@ public class LoginController {
 		try {
 			arr = request.getBytes();
 			System.out.println("Serialized bytes: " + arr.length);
-			ServerIpController.clientController.getClient().handleMessageFromClientUI(arr);
-		} 
+			client.handleMessageFromClientUI(arr);
+		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(	ServerIpController.clientController.getClient().user.toString());
-		user= ServerIpController.clientController.getClient().user;
-		switch (ServerIpController.clientController.getClient().user.getPermission()) {
+		System.out.println(client.user.toString());
+		user= client.user;
+		switch (client.user.getPermission()) {
 
 		case "Password invalid":
 			lblInvalidPW.setVisible(true);
 			break;
-		case "ID not registered":
-			lblIDnr.setVisible(true);
+		case "Connected":
+			lblconnected.setVisible(true);
+			User loggedInUser = client.user;
+			openAppropriateMenu(event, loggedInUser);
 			break;
-			case "Connected":
-				lblconnected.setVisible(true);
-				User loggedInUser = ServerIpController.clientController.getClient().user;
-				openAppropriateMenu(event, loggedInUser);
-				break;
-//		case "USER":
-//			ParkManagerController.user=user;
-//			((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
-//			Stage primaryStage1 = new Stage();
-//			Parent root1 = FXMLLoader.load(getClass().getResource("/fxml/ParkManager.fxml"));
-//
-//			Scene scene1 = new Scene(root1);
-//			//scene1.getStylesheets().add(getClass().getResource("/fxml/ParkManager.css").toExternalForm());
-//			primaryStage1.setTitle("");
-//			primaryStage1.initStyle(StageStyle.UNDECORATED);
-//			primaryStage1.setScene(scene1);
-//			primaryStage1.setResizable(false);
-//			primaryStage1.show();
-//			break;
-//		case "Manager" :
-//			WorkerPageController.user=user;
-//			((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
-//			Stage primaryStage2 = new Stage();
-//			Parent root2 = FXMLLoader.load(getClass().getResource("/fxml/WorkerPage.fxml"));
-//			Scene scene2 = new Scene(root2);
-//			//scene2.getStylesheets().add(getClass().getResource("/fxml/WorkerPage.css").toExternalForm());
-//			primaryStage2.setTitle("");
-//			primaryStage2.initStyle(StageStyle.UNDECORATED);
-//			primaryStage2.setScene(scene2);
-//			primaryStage2.setResizable(false);
-//			primaryStage2.show();
-//			break;
-//
-//		case "Department Manager" :
-//			DepartmentManagerController.user=user;
-//			((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
-//			Stage primaryStage3 = new Stage();
-//			Parent root3 = FXMLLoader.load(getClass().getResource("/fxml/DepartmentManager.fxml"));
-//			Scene scene3 = new Scene(root3);
-//			//scene3.getStylesheets().add(getClass().getResource("/fxml/DepartmentManager.css").toExternalForm());
-//			primaryStage3.initStyle(StageStyle.UNDECORATED);
-//			primaryStage3.setTitle("");
-//			primaryStage3.setScene(scene3);
-//			primaryStage3.setResizable(false);
-//			primaryStage3.show();
-//			break;
 		}
     }
-
 
 	private void openAppropriateMenu(ActionEvent event, User user) {
 		try {
 			String fxmlFile;
 			String cssFile;
 
-//			if (user.getRole().equalsIgnoreCase("Manager")) {
-//				fxmlFile = "/gui/ManagerMainMenu.fxml";
-//				cssFile = "/gui/ManagerMainMenu.css";
-//			} else {
+			if (user.getRole().equalsIgnoreCase("Manager")) {
+				fxmlFile = "/gui/ManagerMainMenu.fxml";
+				cssFile = "/gui/ManagerMainMenu.css";
+
+			} else if (user.getRole().equalsIgnoreCase("CEO")) {
+				fxmlFile = "/gui/CEOMainMenu.fxml";
+				cssFile = "/gui/CEOMainMenu.css";
+			}
+			else {
 				fxmlFile = "/gui/CustomerMainMenu.fxml";
 				cssFile = "/gui/CustomerMainMenu.css";
-//			}
+			}
 
 			((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
 			Scene scene = new Scene(root);
-		//	scene.getStylesheets().add(getClass().getResource(cssFile).toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(cssFile).toExternalForm());
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setTitle("");
 			primaryStage.setScene(scene);

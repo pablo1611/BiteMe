@@ -77,6 +77,7 @@ public class ChatClient extends AbstractClient
 
               case USER_LOGOUT:
                   logout = true;
+                  user = null; // Clear the current user
                   break;
           }
 

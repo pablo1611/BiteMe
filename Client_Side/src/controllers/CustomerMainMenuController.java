@@ -1,6 +1,8 @@
 package controllers;
 
+import client.ChatClient;
 import client.ClientUI;
+import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,10 +31,10 @@ public class CustomerMainMenuController implements Initializable {
     private Button btnCO;
 
     @FXML
-    private Button btnTravelerLogin;
+    private Button btnDisconnect;
 
     @FXML
-    private Button btnWorkerLogin;
+    private Button btnOrderHistory;
 
     @FXML
     private Label lblIDnr;
@@ -50,10 +52,21 @@ public class CustomerMainMenuController implements Initializable {
      * @throws IOException If an error occurs during the process.
      */
     @FXML
-	void Exit (ActionEvent event) throws IOException {
-		ClientUI.chat.closeConnection();
-    	ClientUI.chat.quit();
+	void Exit(ActionEvent event) throws IOException {
+		ChatClient client = ClientUI.getClient();
+		if (client != null) {
+			try {
+			//	Disconnect(event);
+				client.closeConnection();
+				client.quit();
+			} catch (Exception e) {
+				System.out.println("Error while closing connection: " + e.getMessage());
+			}
+		}
+		// Close the application
+		System.exit(0);
 	}
+
     /**
      * Navigates to the page for creating a reservation. 
      * This method hides the current window and opens the reservation page.
@@ -62,39 +75,27 @@ public class CustomerMainMenuController implements Initializable {
      * @throws IOException If an error occurs during loading the FXML.
      */
     @FXML
-    void CreateReservation(ActionEvent event) throws IOException {
-    	((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/SingleReservation.fxml"));
-
-		Scene scene = new Scene(root);			
-		scene.getStylesheets().add(getClass().getResource("/fxml/SingleReservation.css").toExternalForm());
-		primaryStage.setTitle("");
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
+    void CreateOrder(ActionEvent event) throws IOException {
+		//should pass the user instance in order to create an order with specific user.
+		String path1="/gui/CustomerDetailsPage.fxml";
+		String path2="/gui/CustomerDetailsPage.css";
+		openAppropriateMenu(event,path1,path2);
     }
     /**
-     * Navigates to the traveler login page. 
+     * Navigates to the traveler login page.
      * This method hides the current window and opens the traveler login page.
      *
      * @param event The action event that triggered this method.
      * @throws IOException If an error occurs during loading the FXML.
      */
     @FXML
-    void TravelerLogin(ActionEvent event) throws IOException {
-    	((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/TravelerLogin.fxml"));
+    void Disconnect(ActionEvent event) throws IOException {
 
-		Scene scene = new Scene(root);			
-		scene.getStylesheets().add(getClass().getResource("/fxml/TravelerLogin.css").toExternalForm());
-		primaryStage.setTitle("");
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
+		//should implement the User Connection Status to disconnect, and handle case of exit.
+		
+		String path1="/gui/Login.fxml";
+		String path2="/gui/Login.css";
+		openAppropriateMenu(event,path1,path2);
     }
     /**
      * Navigates to the worker login page. 
@@ -104,29 +105,36 @@ public class CustomerMainMenuController implements Initializable {
      * @throws IOException If an error occurs during loading the FXML.
      */
     @FXML
-    void WorkerLogin(ActionEvent event) throws IOException  {
-    	((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
-
-		Scene scene = new Scene(root);			
-		scene.getStylesheets().add(getClass().getResource("/fxml/Login.css").toExternalForm());
-		primaryStage.setTitle("");
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
+    void OrderHistory(ActionEvent event) throws IOException  {
+		String path1="/gui/OrderHistoryPage.fxml";
+		String path2="/gui/OrderHistoryPage.css";
+		openAppropriateMenu(event,path1,path2);
     }
 
-    /*public void start(Stage primaryStage) throws Exception {
-    	Parent root = FXMLLoader.load(getClass().getResource("/fxml/WelcomePage.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/fxml/WelcomePage.css").toExternalForm());
-		primaryStage.setTitle("Welcome Page");
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
-   }*/
+
+	private void openAppropriateMenu(ActionEvent event,String path1,String path2) {
+		try {
+			String fxmlFile=path1;
+			String cssFile=path2;
+
+			((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+			Stage primaryStage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource(cssFile).toExternalForm());
+			primaryStage.initStyle(StageStyle.UNDECORATED);
+			primaryStage.setTitle("");
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			// Handle the exception (e.g., show an error message to the user)
+		}
+	}
+
+
+
     /**
      * Initializes the controller class. 
      * This method is automatically called after the FXML file has been loaded. 
