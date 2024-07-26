@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="627.0" stylesheets="@ServerGUI.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GNServer.ServerGUIController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="616.0" stylesheets="@ServerGUI.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="serverGui.ServerGUIController">
    <children>
-      <TextField fx:id="txtPort" alignment="CENTER" layoutX="230.0" layoutY="188.0" promptText="Enter port " />
-      <Button fx:id="btnConnect" layoutX="278.0" layoutY="471.0" mnemonicParsing="false" onAction="#handleConnect" text="Connect" textAlignment="CENTER">
+      <TextField fx:id="txtPort" alignment="CENTER" layoutX="229.0" layoutY="180.0" prefHeight="37.0" prefWidth="158.0" promptText="Enter port " />
+      <Button fx:id="btnConnect" layoutX="278.0" layoutY="465.0" mnemonicParsing="false" onAction="#handleConnect" text="Connect" textAlignment="CENTER">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font name="Roboto" size="12.0" />
          </font>
       </TextField>
-      <Label fx:id="lblSQLConnection" layoutX="196.0" layoutY="235.0" prefHeight="26.0" prefWidth="233.0" text="Enter your database details" textFill="#387046">
+      <Label fx:id="lblSQLConnection" layoutX="197.0" layoutY="240.0" prefHeight="26.0" prefWidth="233.0" text="Enter your database details" textFill="#387046">
          <font>
             <Font name="Roboto" size="18.0" />
          </font>
@@ -46,9 +46,9 @@
             <Font name="Roboto" size="14.0" />
          </font>
       </Button>
-      <ImageView fitHeight="298.0" fitWidth="401.0" layoutX="122.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="147.0" fitWidth="158.0" layoutX="232.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/images/BiteMe.png" />
+            <Image url="@../images/Server.png" />
          </image>
       </ImageView>
       <Label fx:id="lblFooter" layoutX="10.0" layoutY="858.0" text="© All rights reserved to Team Number 11." textAlignment="CENTER" textFill="#387046">

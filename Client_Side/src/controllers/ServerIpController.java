@@ -24,7 +24,7 @@ import java.io.IOException;
 public class ServerIpController extends Application {
 	public static String IP;
 	public static int Port;
-
+	public static ClientController clientController;
     @FXML
     private Button btnIP;
 
@@ -61,15 +61,14 @@ public class ServerIpController extends Application {
     		System.out.println(Port);
     		System.out.println(IP);
     		ClientUI.host=IP;
-        	System.out.println(ClientUI.host);
 	    }
 	    catch(ArrayIndexOutOfBoundsException e)
 	    {
-	    	ClientUI.host = "localhost";
+	    	ClientUI.host = "localhost-default";
 	    }
 
-    	ClientUI.chat= new ClientController(ClientUI.host,Port);
-    	((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
+		clientController = new ClientController(IP, Port);
+		((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/Login.fxml"));
 

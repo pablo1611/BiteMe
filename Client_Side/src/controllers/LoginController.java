@@ -1,4 +1,5 @@
 package controllers;
+import client.ClientController;
 import client.ClientUI;
 import common.RequestType;
 import entities.Request;
@@ -58,10 +59,18 @@ public class LoginController {
      * @param event The action event that triggered this method.
      * @throws IOException If an error occurs during the process.
      */
-    @FXML
-	void Exit (ActionEvent event) throws IOException {
-		ClientUI.client.closeConnection();
-    	ClientUI.client.quit();
+	@FXML
+	void Exit(ActionEvent event) throws IOException {
+		if (ServerIpController.clientController != null) {
+			try {
+				ServerIpController.clientController.getClient().closeConnection();
+				ServerIpController.clientController.getClient().quit();
+			} catch (Exception e) {
+				System.out.println("Error while closing connection: " + e.getMessage());
+			}
+		}
+		// Close the application
+		System.exit(0);
 	}
     /**
      * Navigates back to the Welcome Page.

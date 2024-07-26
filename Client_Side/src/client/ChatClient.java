@@ -31,8 +31,6 @@ public class ChatClient extends AbstractClient
   public static boolean awaitResponse = false;
   public static User user;
 
-//  //private static OrderDetailViewController orderPage; useless?
-//  private static OrderSearchPageController startPage = new OrderSearchPageController();
 
   //Constructors ****************************************************
   
@@ -116,7 +114,7 @@ public class ChatClient extends AbstractClient
     }
   }
 
-  
+
   /**
    * This method terminates the client.
    */
@@ -129,5 +127,11 @@ public class ChatClient extends AbstractClient
     catch(IOException e) {}
     System.exit(0);
   }
+
+
+
+
+
+
 }
 //End of ChatClient class
