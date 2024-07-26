@@ -1,5 +1,7 @@
 package BMServer;
 
+import entities.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,20 +33,6 @@ public class DBController {
         }
     }
 
-    public boolean checkIfUserExists(String userName) {
-        String query = "SELECT 1 FROM users WHERE userName = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, userName);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return true; // User exists
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false; // User does not exist
-    }
 
     public static void closeDBconnection() {
         try {
@@ -55,4 +43,73 @@ public class DBController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Checks if a user exists in the database.
+     *
+     * @param userName - The username(String) to check.
+     * @return true if the user exists, false otherwise.
+     */
+    public boolean checkIfUserExist(String userName) {
+        String query = "SELECT COUNT(*) FROM Users WHERE UserName = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, userName);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public User userLogin(User user) {
+        String query = "SELECT UserPassword, ConnectionStatus FROM Users WHERE UserID = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, user.getUserName());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String password = rs.getString("UserPassword");
+                    String connectionStatus = rs.getString("ConnectionStatus");
+
+                    if (!password.equals(user.getPassword())) {
+                        user.setPermission("Password invalid");
+                        return user;
+                    }
+
+                    if (connectionStatus.equals("Connected")) {
+                        user.setPermission("Connected");
+                        return user;
+                    }
+                } else {
+                    user.setPermission("User not found");
+                    return user;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            user.setPermission("Error during login");
+            return user;
+        }
+        return user;
+    }
+
+    /**
+     * Logs out a user, updating their connection status in the database.
+     *
+     * @param user - The User object to log out.
+     */
+    public void userLogout(User user) {
+        String query = "UPDATE Users SET ConnectionStatus = 'Disconnected' WHERE UserID = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, user.getUserName());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

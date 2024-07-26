@@ -30,9 +30,10 @@ public class ChatClient extends AbstractClient
   ChatIF clientUI;
   public static boolean awaitResponse = false;
   public static User user;
+  public static boolean logout;
 
 
-  //Constructors ****************************************************
+    //Constructors ****************************************************
   
   /**
    * Constructs an instance of the chat client.
@@ -73,7 +74,12 @@ public class ChatClient extends AbstractClient
               case USER_LOGIN:
                   user = (User) message.getRequest();
                   break;
+
+              case USER_LOGOUT:
+                  logout = true;
+                  break;
           }
+
       } catch (ClassNotFoundException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
