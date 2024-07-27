@@ -38,8 +38,12 @@ public class LoginController {
 
     @FXML
     private Label lblUserName;
-    
-    @FXML
+
+	@FXML
+	private Label lblnotExist;
+
+
+	@FXML
     private Label lblInvalidPW;
 
     @FXML
@@ -135,9 +139,11 @@ public class LoginController {
 		System.out.println(client.user.toString());
 		user= client.user;
 		switch (client.user.getPermission()) {
-
 		case "Password invalid":
 			lblInvalidPW.setVisible(true);
+			break;
+		case "UserNotExist":
+			lblnotExist.setVisible(true);
 			break;
 		case "Connected":
 			lblconnected.setVisible(true);
@@ -155,8 +161,8 @@ public class LoginController {
 			if (user.getRole().equalsIgnoreCase("Manager")) {
 				fxmlFile = "/gui/ManagerMainMenu.fxml";
 				cssFile = "/gui/ManagerMainMenu.css";
-
-			} else if (user.getRole().equalsIgnoreCase("CEO")) {
+			}
+			if (user.getRole().equalsIgnoreCase("CEO")) {
 				fxmlFile = "/gui/CEOMainMenu.fxml";
 				cssFile = "/gui/CEOMainMenu.css";
 			}
@@ -165,11 +171,20 @@ public class LoginController {
 				cssFile = "/gui/CustomerMainMenu.css";
 			}
 
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+			Parent root = loader.load();
+
+			// Get the controller of the next screen
+			AbstractController controller = loader.getController();
+			// Pass the user to the controller
+			controller.setUser(user);
+
 			((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource(cssFile).toExternalForm());
+			Stage primaryStage = new Stage();
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setTitle("");
 			primaryStage.setScene(scene);

@@ -36,12 +36,10 @@ public class EchoServer extends AbstractServer {
       System.out.println(message.toString());
         // if (msg instanceof Request) {
         System.out.println(message.toString());
-      System.out.println("a1");
         System.out.println(message.getType().toString());
         switch (message.getType()) {
           case USER_LOGIN:
             try {
-              System.out.println("a2");
               User user = (User) message.getRequest();
               System.out.println(user.toString());
               request.setRequest(database.userLogin(user));
@@ -49,11 +47,9 @@ public class EchoServer extends AbstractServer {
               request.setType(RequestType.USER_LOGIN);
               byte[] arr;
               try {
-                System.out.println("a3");
                 arr = request.getBytes();
                 System.out.println("Serialized bytes: " + arr.length);
                 client.sendToClient(arr);
-                System.out.println("a4");
               } catch (IOException e) {
                 e.printStackTrace();
               }

@@ -76,6 +76,7 @@ public class ChatClient extends AbstractClient
                   break;
 
               case USER_LOGOUT:
+                  System.out.println("Logout successful");
                   logout = true;
                   user = null; // Clear the current user
                   break;
@@ -134,11 +135,5 @@ public class ChatClient extends AbstractClient
     catch(IOException e) {}
     System.exit(0);
   }
-
-
-
-
-
-
 }
 //End of ChatClient class

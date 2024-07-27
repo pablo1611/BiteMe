@@ -2,6 +2,8 @@ package controllers;
 
 import client.ChatClient;
 import client.ClientUI;
+import entities.Request;
+import common.RequestType;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +26,7 @@ import java.util.ResourceBundle;
  * This class handles the navigation from the welcome page to other pages based on the user's choice, 
  * including traveler login, worker login, and creating a reservation.
  */
-public class CustomerMainMenuController implements Initializable {
+public class CustomerMainMenuController extends AbstractController {
 	@FXML
 	private Button btnExit;
     @FXML
@@ -44,26 +46,42 @@ public class CustomerMainMenuController implements Initializable {
 
     @FXML
     private Label lblconnected;
-    /**
+
+
+	/**
      * Handles the action to exit the application. 
      * This method closes the connection to the server and quits the application.
      *
      * @param event The action event that triggered this method.
      * @throws IOException If an error occurs during the process.
      */
-    @FXML
+	@FXML
 	void Exit(ActionEvent event) throws IOException {
-		ChatClient client = ClientUI.getClient();
+		ChatClient client=ClientUI.getClient();
+		try {
+			System.out.println("Preparing logout request for user: " + currentUser);
+			Request request = new Request();
+			request.setType(RequestType.USER_LOGOUT);
+			request.setRequest(currentUser);
+			System.out.println("Request object: " + request);
+
+			byte[] arr = request.getBytes();
+			System.out.println("Serialized logout request: " + arr);
+			client.handleMessageFromClientUI(arr);
+
+		} catch (IOException e) {
+			System.out.println("Error while sending logout request: " + e.getMessage());
+		}
+
+		// Close connection and quit application
 		if (client != null) {
 			try {
-			//	Disconnect(event);
 				client.closeConnection();
 				client.quit();
 			} catch (Exception e) {
 				System.out.println("Error while closing connection: " + e.getMessage());
 			}
 		}
-		// Close the application
 		System.exit(0);
 	}
 
@@ -91,8 +109,22 @@ public class CustomerMainMenuController implements Initializable {
     @FXML
     void Disconnect(ActionEvent event) throws IOException {
 
-		//should implement the User Connection Status to disconnect, and handle case of exit.
-		
+		ChatClient client=ClientUI.getClient();
+		try {
+			System.out.println("Preparing logout request for user: " + currentUser);
+			Request request = new Request();
+			request.setType(RequestType.USER_LOGOUT);
+			request.setRequest(currentUser);
+			System.out.println("Request object: " + request);
+
+			byte[] arr = request.getBytes();
+			System.out.println("Serialized logout request: " + arr);
+			client.handleMessageFromClientUI(arr);
+
+		} catch (IOException e) {
+			System.out.println("Error while sending logout request: " + e.getMessage());
+		}
+
 		String path1="/gui/Login.fxml";
 		String path2="/gui/Login.css";
 		openAppropriateMenu(event,path1,path2);
@@ -131,22 +163,6 @@ public class CustomerMainMenuController implements Initializable {
 			e.printStackTrace();
 			// Handle the exception (e.g., show an error message to the user)
 		}
-	}
-
-
-
-    /**
-     * Initializes the controller class. 
-     * This method is automatically called after the FXML file has been loaded. 
-     * It can be used to initialize the state of the controller.
-     *
-     * @param arg0 The location used to resolve relative paths for the root object, or null if the location is not known.
-     * @param arg1 The resources used to localize the root object, or null if the root object was not localized.
-     */
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

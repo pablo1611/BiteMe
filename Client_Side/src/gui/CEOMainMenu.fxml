@@ -14,6 +14,6 @@
         </Text>
         <Button fx:id="viewReportsButton" layoutX="225.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleViewReports" prefHeight="40.0" prefWidth="150.0" text="View Reports" />
         <Button fx:id="logoutButton" layoutX="225.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="150.0" text="Logout" />
-        <Button fx:id="exitButton" layoutX="225.0" layoutY="290.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="40.0" prefWidth="150.0" text="Exit" />
+        <Button fx:id="exitButton" layoutX="225.0" layoutY="290.0" mnemonicParsing="false" onAction="#Exit" prefHeight="40.0" prefWidth="150.0" text="Exit" />
     </children>
 </AnchorPane>

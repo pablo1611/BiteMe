@@ -19,6 +19,8 @@
       <TextField id="txtFUserName" fx:id="txtFUserName" layoutX="228.0" layoutY="247.0" prefHeight="41.0" prefWidth="194.0" promptText="User Name" />
    	  <Label fx:id="lblInvalidPW" layoutX="281.0" layoutY="422.0" text="Invalid Password" textFill="#d30e0e" visible="false" />
       <Label fx:id="lblconnected" layoutX="263.0" layoutY="422.0" text="already connected" textFill="#f70202" visible="false" />
+      <Label fx:id="lblnotExist" layoutX="263.0" layoutY="422.0" text="already connected" textFill="#f70202" visible="false" />
+
       <Button fx:id="btnExit" layoutX="594.0" mnemonicParsing="false" onAction="#Exit" prefHeight="48.0" prefWidth="57.0" text="Exit">
          <font>
             <Font size="14.0" />
