@@ -24,7 +24,7 @@ import java.io.IOException;
  * Controller class for the Worker Login Page.
  * This class handles the authentication process for workers attempting to log in to the system.
  */
-public class LoginController {
+public class LoginController extends AbstractController {
 	@FXML
 	private Button btnExit;
     @FXML
@@ -56,6 +56,7 @@ public class LoginController {
     private TextField txtFUserName;
 
 	boolean flag;
+
     /**
      * Exits the application.
      * This method is triggered when the Exit button is pressed.
@@ -78,30 +79,30 @@ public class LoginController {
 		System.exit(0);
 	}
 
-    /**
-     * Navigates back to the Welcome Page.
-     * This method is triggered when the Back button is pressed.
-     *
-     * @param event The action event that triggered this method.
-     * @throws IOException If an error occurs during loading the FXML.
-     */
-    @FXML
-    void Back(ActionEvent event) throws IOException {
-    	((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
+	/**
+	 * Navigates back to the Welcome Page.
+	 * This method is triggered when the Back button is pressed.
+	 *
+	 * @param event The action event that triggered this method.
+	 * @throws IOException If an error occurs during loading the FXML.
+	 */
+	@FXML
+	void Back(ActionEvent event) throws IOException {
+		((Node) event.getSource()).getScene().getWindow().hide();; //hiding primary window
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerIP.fxml"));
 
 
-		Scene scene = new Scene(root);			
+		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/gui/ServerIP.css").toExternalForm());
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
-			
+
 		primaryStage.show();
 
 
-    }
+	}
     /**
      * Attempts to log in a worker.
      * This method validates the user's credentials against the system's records. If successful, 
@@ -113,45 +114,43 @@ public class LoginController {
      */
 
 
-    @FXML
-    void Login(ActionEvent event) throws IOException {
+	@FXML
+	void Login(ActionEvent event) throws IOException {
+		String username = txtFUserName.getText();
+		String password = txtFPassword.getText();
+		User user = new User(username, password);
 
-		String username=txtFUserName.getText();
-		String password=txtFPassword.getText();
-		User user = new User(username,password);
+		ChatClient client = ClientUI.getClient();
 
-		ChatClient client=ClientUI.getClient();
-
-		//send to server:
-		Request request= new Request();
+		Request request = new Request();
 		request.setType(RequestType.USER_LOGIN);
 		request.setRequest(user);
-		System.out.println(request.getRequest().toString()); //print the request+type of request
-		byte[] arr;
+		System.out.println(request.getRequest().toString());
+
 		try {
-			arr = request.getBytes();
+			byte[] arr = request.getBytes();
 			System.out.println("Serialized bytes: " + arr.length);
 			client.handleMessageFromClientUI(arr);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		System.out.println(client.user.toString());
-		user= client.user;
+		user = client.user;
+
 		switch (client.user.getPermission()) {
-		case "Password invalid":
-			lblInvalidPW.setVisible(true);
-			break;
-		case "UserNotExist":
-			lblnotExist.setVisible(true);
-			break;
-		case "Connected":
-			lblconnected.setVisible(true);
-			User loggedInUser = client.user;
-			openAppropriateMenu(event, loggedInUser);
-			break;
+			case "Password invalid":
+				lblInvalidPW.setVisible(true);
+				break;
+			case "User not Exist":
+				lblnotExist.setVisible(true);
+				break;
+			case "Connected":
+				lblconnected.setVisible(true);
+				openAppropriateMenu(event, client.user);
+				break;
 		}
-    }
+	}
 
 	private void openAppropriateMenu(ActionEvent event, User user) {
 		try {
@@ -161,12 +160,10 @@ public class LoginController {
 			if (user.getRole().equalsIgnoreCase("Manager")) {
 				fxmlFile = "/gui/ManagerMainMenu.fxml";
 				cssFile = "/gui/ManagerMainMenu.css";
-			}
-			if (user.getRole().equalsIgnoreCase("CEO")) {
+			} else if (user.getRole().equalsIgnoreCase("CEO")) {
 				fxmlFile = "/gui/CEOMainMenu.fxml";
 				cssFile = "/gui/CEOMainMenu.css";
-			}
-			else {
+			} else {
 				fxmlFile = "/gui/CustomerMainMenu.fxml";
 				cssFile = "/gui/CustomerMainMenu.css";
 			}

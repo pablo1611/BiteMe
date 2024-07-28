@@ -37,7 +37,9 @@ public class EchoServer extends AbstractServer {
         // if (msg instanceof Request) {
         System.out.println(message.toString());
         System.out.println(message.getType().toString());
+
         switch (message.getType()) {
+
           case USER_LOGIN:
             try {
               User user = (User) message.getRequest();
@@ -56,6 +58,7 @@ public class EchoServer extends AbstractServer {
             } catch (Exception e) {
             };
             break;
+
           case USER_LOGOUT:
             try {
               User user = (User) message.getRequest();

@@ -43,27 +43,28 @@ public class DBController {
         }
     }
 
-    /**
-     * Checks if a user exists in the database.
-     *
-     * @param userName - The username(String) to check.
-     * @return true if the user exists, false otherwise.
-     */
-    public boolean checkIfUserExist(String userName) {
-        String query = "SELECT COUNT(*) FROM Users WHERE UserName = ?";
-        try (PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, userName);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    int count = rs.getInt(1);
-                    return count > 0;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+//    /**
+//     * Checks if a user exists in the database.
+//     *
+//     * @param userName - The username(String) to check.
+//     * @return true if the user exists, false otherwise.
+//     */
+
+//    public boolean checkIfUserExist(String userName) {
+//        String query = "SELECT COUNT(*) FROM users WHERE Username = ?";
+//        try (PreparedStatement ps = conn.prepareStatement(query)) {
+//            ps.setString(1, userName);
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    int count = rs.getInt(1);
+//                    return count > 0;
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
 
 
     public User userLogin(User user) {
@@ -101,7 +102,8 @@ public class DBController {
                         }
                     }
                 } else {
-                    user.setPermission("User not found");
+                    user.setPermission("User not Exist");
+                    return user;  // Return immediately if user doesn't exist
                 }
             }
         } catch (SQLException e) {
