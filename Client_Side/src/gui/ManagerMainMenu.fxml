@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.ManagerMainMenuController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" stylesheets="@ManagerMainMenu.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerMainMenuController">
+    <children>
+        <Text layoutX="140.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-title" text="Manager Main Menu" wrappingWidth="397.68115234375">
+            <font>
+                <Font size="37.0" />
+            </font>
+        </Text>
+        <Button id="btnViewReports" fx:id="btnViewReports" layoutX="202.0" layoutY="286.0" mnemonicParsing="false" onAction="#ViewReports" prefHeight="53.0" prefWidth="260.0" styleClass="main-button" text="View Reports">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="16.0" />
+            </font>
+        </Button>
+        <Button id="btnCreateCustomer" fx:id="btnCreateCustomer" layoutX="45.0" layoutY="528.0" mnemonicParsing="false" onAction="#CreateCustomer" prefHeight="41.0" prefWidth="186.0" styleClass="main-button" text="Create Customer">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="16.0" />
+            </font>
+        </Button>
+        <Button id="btnLogout" fx:id="btnLogout" layoutX="264.0" layoutY="356.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="122.0" styleClass="main-button" text="Logout">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="16.0" />
+            </font>
+        </Button>
+        <Button id="btnExit" fx:id="btnExit" layoutX="550.0" layoutY="20.0" mnemonicParsing="false" onAction="#Exit" prefHeight="30.0" prefWidth="70.0" styleClass="exit-button" text="Exit">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="14.0" />
+            </font>
+        </Button>
+        <ImageView fitHeight="53.0" fitWidth="81.0" layoutX="558.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/BiteMe.png" />
+            </image>
+        </ImageView>
+    </children>
+</Pane>

@@ -1,0 +1,54 @@
+/* ManagerMainMenu.css */
+.pane {
+    -fx-background-color: #f0f0f0; /* Light background color */
+}
+
+.main-title {
+    -fx-font-size: 37px;
+    -fx-font-family: 'Arial Rounded MT Bold';
+    -fx-fill: #000000; /* Solid black color */
+    -fx-font-weight: bold; /* Bold font */
+    -fx-effect: null; /* Remove any shadow effects */
+}
+
+.main-button {
+    -fx-background-color: #4CAF50; /* Green background */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: 'Arial Rounded MT Bold';
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-padding: 12 24;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.main-button:hover {
+    -fx-background-color: #45a049; /* Darker green on hover */
+}
+
+.main-button:pressed {
+    -fx-background-color: #388e3c; /* Even darker green when pressed */
+}
+
+.exit-button {
+    -fx-background-color: #f44336; /* Red background */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial Rounded MT Bold';
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.exit-button:hover {
+    -fx-background-color: #d32f2f; /* Darker red on hover */
+}
+
+.exit-button:pressed {
+    -fx-background-color: #c62828; /* Even darker red when pressed */
+}
+
+.image-view {
+    -fx-effect: null; /* Remove any shadow effects */
+}
