@@ -1,42 +1,35 @@
 package client;
+
+import controllers.ServerIpController;
+
+import java.io.IOException;
+
+import common.ChatIF;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import controllers.ClientVerificationController;
 
-public class ClientUI extends Application {
-	
-	public static ClientController chat; //only one instance
-	public static BiteMeClient client;
-	
-	
-	
-//	receive orderID from startController and forward it to the server
-	public static void requestOrderDetails(String orderNum) {
-		chat.accept(orderNum);
-	}
-	
-	public static void requestOrderUpdate(String newOrderData) {
-		chat.accept(newOrderData);
-	}
-	
-	public static void main( String args[] ) throws Exception
-	   { 
-		//launch start method 
-		    launch(args);  
-	   } 
+public class ClientUI extends Application implements ChatIF {
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		 //new GUI - start page
-		ClientVerificationController aFrame = new ClientVerficiationController(); 
-		aFrame.start(primaryStage);
-	}
-	
-	public static void newConnection(String ip) {
-		//create connection to server.
-		 chat= new ClientController(ip, 5555);
-	}
+    public static ChatClient chat; //only one instance
+    public static String host;
 
+    public static void main(String[] args) throws Exception {
+        launch(args);  
+    } 
 
-	
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        ServerIpController aFrame = new ServerIpController();
+        aFrame.start(primaryStage);
+    }
+
+    @Override
+    public void display(String message) {
+        System.out.println("> " + message);
+    }
+
+    public static void initializeClient(String host, int port) throws IOException {
+        chat = new ChatClient(host, port, new ClientUI());
+    }
 }
+

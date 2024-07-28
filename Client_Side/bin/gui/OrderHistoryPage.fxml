@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #f0f0f0; -fx-padding: 20;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OrderHistoryController">
+    <children>
+        <Text style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Order History" />
+        <TableView fx:id="orderHistoryTable" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="orderIdColumn" prefWidth="184.0" text="Order ID">
+                    <cellValueFactory><PropertyValueFactory property="orderId" /></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="restaurantColumn" minWidth="0.0" prefWidth="192.0" text="Restaurant">
+                    <cellValueFactory><PropertyValueFactory property="restaurant" /></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="223.199951171875" text="Date">
+                    <cellValueFactory><PropertyValueFactory property="date" /></cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <Button onAction="#handleBack" style="-fx-background-color: #1E90FF; -fx-text-fill: white;" text="Back" />
+    </children>
+</VBox>

@@ -1,7 +1,10 @@
 package entities;
 
-public class Restaurant {
-    private String branch;
+import java.io.Serializable;
+
+public class Restaurant implements Serializable {
+    private static final long serialVersionUID = 1L;
+	private String branch;
     private int restaurantId;
 
     // Getters and Setters
