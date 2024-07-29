@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" stylesheets="@ManagerMainMenu.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerMainMenuController">
     <children>
-        <Text layoutX="154.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-title" text="Manager Main Menu" wrappingWidth="381.68115234375">
+        <Text layoutX="154.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-title" text="CEO Main Menu" wrappingWidth="381.68115234375">
             <font>
                 <Font size="37.0" />
             </font>
