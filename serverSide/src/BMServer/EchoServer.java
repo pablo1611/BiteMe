@@ -78,6 +78,20 @@ public class EchoServer extends AbstractServer {
               System.out.println("Error during logout process: " + e.getMessage());
             };
             break;
+
+          case CREATE_USER:
+            try {
+              User newUser = (User) message.getRequest();
+              boolean userCreated = database.createUser(newUser);
+              request.setRequest(userCreated);
+              request.setType(RequestType.CREATE_USER);
+              byte[] arr = request.getBytes();
+              System.out.println("User created: " + userCreated);
+              client.sendToClient(arr);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            break;
         }
     } catch (IOException e) {
       // TODO Auto-generated catch block

@@ -130,5 +130,24 @@ public class DBController {
             return false;
         }
     }
+
+    public boolean createUser(User user) {
+        String query = "INSERT INTO Users (Username, Password, Name, Phone, Address, Role, Status, Email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getName());
+            ps.setString(4, user.getPhone());
+            ps.setString(5, user.getAddress());
+            ps.setString(6, user.getRole());
+            ps.setString(7, user.getStatus());
+            ps.setString(8, user.getEmail());
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 

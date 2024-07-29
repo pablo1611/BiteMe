@@ -1,5 +1,5 @@
 .root {
-    -fx-background-color:#d9ecd0;
+    -fx-background-color:  #b7d2eb; /* Slightly bluer light grey-blue background */
 }
 
 .label, .text {
@@ -7,7 +7,7 @@
 }
 
 .button {
-    -fx-background-color: #99BC85;
+    -fx-background-color: #4682B4;
     -fx-background-radius: 30px;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,2,2 );
     -fx-scale-x: 1;

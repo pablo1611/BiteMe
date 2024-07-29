@@ -31,11 +31,10 @@ public class ManagerMainMenuController extends AbstractController {
         // Add your code here to open the reports view
     }
 
+
     @FXML
-    void CreateCustomer(ActionEvent event) {
-        // Implement the action for creating a customer
-        System.out.println("Create Customer button clicked");
-        // Add your code here to open the create customer view
+    void CreateCustomer(ActionEvent event) throws IOException {
+        navigateTo("/gui/CreateCustomer.fxml", "/gui/CreateCustomer.css", (Node) event.getSource());
     }
 
     @FXML

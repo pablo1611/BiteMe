@@ -80,6 +80,9 @@ public class ChatClient extends AbstractClient
                   logout = true;
                   user = null; // Clear the current user
                   break;
+              case CREATE_USER:
+                  System.out.println("User created successfully");
+                  break;
           }
 
       } catch (ClassNotFoundException e) {
