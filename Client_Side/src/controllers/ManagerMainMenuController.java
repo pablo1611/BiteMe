@@ -21,6 +21,7 @@ public class ManagerMainMenuController extends AbstractController {
     @FXML
     private Button btnExit;
 
+
     @FXML
     void ViewReports(ActionEvent event) throws IOException {
         System.out.println("Current user in ViewReports: " + currentUser); // Debug

@@ -66,12 +66,6 @@ public class CustomerMainMenuController extends AbstractController {
 		handleLogout(event);
 	}
 
-	@FXML
-	void OrderHistory(ActionEvent event) throws IOException {
-		String path1 = "/gui/OrderHistoryPage.fxml";
-		String path2="/gui/OrderHistoryPage.css";
-		navigateTo(path1,path2, (Node) event.getSource());
-	}
 }
 
 

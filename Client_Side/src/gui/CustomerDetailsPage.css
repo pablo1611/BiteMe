@@ -1,38 +1,81 @@
-/* DetailsPage.css */
-
-/* Title Label */
-.label.title {
-    -fx-font-size: 48px;
-    -fx-font-family: 'Arial Rounded MT Bold';
-    -fx-text-fill: #ff4500;
+.root {
+    -fx-background-color: #EEF5FF; /* Light blue background color */
 }
 
-.label.restaurant, .label.branch {
-    -fx-font-size: 18px;
-    -fx-font-family: 'Arial Rounded MT Bold';
-    -fx-text-fill: #ff4500;
+.label, .text {
+    -fx-text-fill: #4a4a4a; /* Dark grey for readability */
 }
 
-/* ComboBox */
-.combo-box {
-    -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
-}
-
-/* Buttons */
 .button {
-    -fx-font-family: 'Arial Rounded MT Bold';
-    -fx-font-size: 16px;
+    -fx-background-color: #EEF5FF; /* Match the background color */
+    -fx-background-radius: 30px; /* Rounded edges */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,2,2 ); /* Shadow effect */
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: all 0.2s; /* Smooth transition for scaling */
 }
 
-.button.exit {
-    -fx-font-size: 14px;
-    -fx-font-family: 'Arial Rounded MT Bold';
+.button:hover {
+    -fx-background-color: #D1E0E0; /* Light grey on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 8,0,4,4 ); /* Enhanced shadow effect */
 }
 
-.total-price {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
+.button:pressed {
+    -fx-background-color: #B0C0C0; /* Slightly darker grey when pressed */
 }
 
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 10; /* Softer edges */
+    -fx-border-color: #aaaaaa; /* Softer border color */
+    -fx-border-radius: 10;
+    -fx-font-family: "Calibri"; /* Consistent playful font */
+}
 
+#btnCO {
+    -fx-background-color: #EEF5FF; /* Match the background color */
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,2,2 );
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: all 0.2s;
+}
+
+#btnCO:hover {
+    -fx-background-color: #D1E0E0; /* Light grey on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 8,0,4,4 );
+}
+
+#btnExit{
+	-fx-background-color: #A1B4BB;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,2,2 );
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: all 0.2s;
+}
+#btnExit:hover {
+    -fx-background-color: #EEF5FF;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 8,0,4,4 );
+}
+
+#btnBack{
+	-fx-background-color: #A1B4BB;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,2,2 );
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: all 0.2s;
+}
+#btnBack:hover {
+    -fx-background-color: #EEF5FF;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 8,0,4,4 );
+}

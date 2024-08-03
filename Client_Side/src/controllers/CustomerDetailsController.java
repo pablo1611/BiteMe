@@ -15,6 +15,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.ImageView;
 
 public class CustomerDetailsController extends AbstractController {
 
@@ -40,10 +43,27 @@ public class CustomerDetailsController extends AbstractController {
     private Button btnExit;
 
     @FXML
+    private Button btnBack;
+
+
+    @FXML
+    private ImageView deliveryImageView;
+
+    @FXML
+    private ImageView scheduleImageView;
+
+    @FXML
+    private ImageView pickUpImageView;
+
+    @FXML
     public void initialize() {
         // Initialize ComboBoxes with data from the database
         loadRestaurants();
         loadBranches();
+        // Set MouseTransparent to true for each ImageView
+        deliveryImageView.setMouseTransparent(true);
+        scheduleImageView.setMouseTransparent(true);
+        pickUpImageView.setMouseTransparent(true);
     }
 
     private void loadRestaurants() {
@@ -84,8 +104,30 @@ public class CustomerDetailsController extends AbstractController {
         branchComboBox.getItems().addAll("North", "South", "Center");
     }
 
+    private void showAlert(String message) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Selection Required");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private boolean validateSelection() {
+        if (restaurantComboBox.getValue() == null) {
+            showAlert("Please select a restaurant.");
+            return false;
+        }
+        if (branchComboBox.getValue() == null) {
+            showAlert("Please select a branch.");
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     private void handlePickUp(ActionEvent event) {
+        if (!validateSelection()) return;
+
         // Handle PICK-UP action
         System.out.println("Pick UP selected");
 
@@ -101,6 +143,8 @@ public class CustomerDetailsController extends AbstractController {
 
     @FXML
     private void handleDelivery(ActionEvent event) {
+        if (!validateSelection()) return;
+
         // Create and store OrderDetails
         OrderDetails orderDetails = new OrderDetails(this.currentUser, "DELIVERY");
         orderDetails.setRestaurant(restaurantComboBox.getValue());
@@ -113,6 +157,8 @@ public class CustomerDetailsController extends AbstractController {
 
     @FXML
     private void handleBusinessDelivery(ActionEvent event) {
+        if (!validateSelection()) return;
+
         // Create and store OrderDetails
         OrderDetails orderDetails = new OrderDetails(this.currentUser, "BUSINESS DELIVERY");
         orderDetails.setRestaurant(restaurantComboBox.getValue());
@@ -124,7 +170,15 @@ public class CustomerDetailsController extends AbstractController {
     }
 
     @FXML
+    private void handleBack(ActionEvent event) {
+        // Implement navigation to the previous page or desired action
+        navigateTo("/gui/CustomerMainMenu.fxml", "/gui/CustomerMainMenu.css", (Node) event.getSource());
+    }
+
+    @FXML
     private void handleEarlyDelivery(ActionEvent event) {
+        if (!validateSelection()) return;
+
         // Create and store OrderDetails
         OrderDetails orderDetails = new OrderDetails(this.currentUser, "EARLY DELIVERY");
         orderDetails.setRestaurant(restaurantComboBox.getValue());

@@ -3,28 +3,79 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="628.0" stylesheets="@CustomerDetailsPage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerDetailsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="661.0" stylesheets="@CustomerDetailsPage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerDetailsController">
     <children>
         <!-- Title -->
-        <Label layoutX="200.0" layoutY="30.0" styleClass="title" text="New Order" />
+        <Label layoutX="219.0" layoutY="50.0" prefHeight="43.0" prefWidth="243.0" styleClass="title" text="New Order">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="36.0" />
+            </font>
+        </Label>
 
         <!-- Restaurant Selection -->
-        <Label layoutX="99.0" layoutY="103.0" styleClass="label restaurant" text="Restaurant" />
-        <ComboBox fx:id="restaurantComboBox" layoutX="96.0" layoutY="137.0" prefHeight="25.0" prefWidth="164.0" promptText="Select a Restaurant" />
+        <Label layoutX="30.0" layoutY="183.0" prefHeight="17.0" prefWidth="57.0" styleClass="label" text="Restaurant" />
+        <ComboBox fx:id="restaurantComboBox" layoutX="95.0" layoutY="171.0" prefHeight="41.0" prefWidth="194.0" promptText="Select a Restaurant" />
 
         <!-- Branch Selection -->
-        <Label layoutX="402.0" layoutY="103.0" styleClass="label branch" text="Branch" />
-        <ComboBox fx:id="branchComboBox" layoutX="389.0" layoutY="137.0" prefHeight="22.0" prefWidth="171.0" promptText="Select a Branch" />
+        <Label layoutX="356.0" layoutY="183.0" styleClass="label" text="Branch" />
+        <ComboBox fx:id="branchComboBox" layoutX="400.0" layoutY="171.0" prefHeight="41.0" prefWidth="194.0" promptText="Select a Branch" />
+
+        <!-- Image Buttons -->
+        <Button fx:id="btnDelivery" layoutX="261.0" layoutY="321.0" onAction="#handleDelivery" prefHeight="130.0" prefWidth="175.0" styleClass="image-button" />
+        <Button fx:id="btnBusinessDelivery" layoutX="31.0" layoutY="495.0" onAction="#handleBusinessDelivery" prefHeight="61.0" prefWidth="194.0" styleClass="button" text="Business Delivery">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnEarlyDelivery" layoutX="465.0" layoutY="321.0" onAction="#handleEarlyDelivery" prefHeight="130.0" prefWidth="175.0" styleClass="image-button" />
+        <Button fx:id="btnPickUp" layoutX="31.0" layoutY="321.0" onAction="#handlePickUp" prefHeight="130.0" prefWidth="194.0" styleClass="image-button" />
+
+        <!-- Image Views -->
+        <ImageView fx:id="deliveryImageView" fitHeight="122.0" fitWidth="166.0" layoutX="286.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/Delivery.png" />
+            </image>
+        </ImageView>
+
+        <ImageView fx:id="scheduleImageView" fitHeight="135.0" fitWidth="213.0" layoutX="449.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/Schedule.png" />
+            </image>
+        </ImageView>
+
+        <ImageView fx:id="pickUpImageView" fitHeight="120.0" fitWidth="233.0" layoutX="21.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/PickUp.png" />
+            </image>
+        </ImageView>
+
+        <!-- Labels -->
+        <Label layoutX="518.0" layoutY="292.0" text="Schedule Delivery">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="320.0" layoutY="292.0" prefHeight="17.0" prefWidth="57.0" text="Delivery">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="101.0" layoutY="291.0" text="Pick-Up">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Label>
+
+        <!-- Back Button -->
+        <Button fx:id="btnBack" layoutX="38.0" layoutY="26.0" onAction="#handleBack" prefHeight="48.0" prefWidth="57.0" styleClass="button" text="Back" />
 
         <!-- Exit Button -->
-        <Button fx:id="btnExit" layoutX="521.0" layoutY="20.0" mnemonicParsing="false" onAction="#exit" prefHeight="50.0" prefWidth="102.0" styleClass="button exit" text="Exit" />
-
-        <!-- Buttons -->
-        <Button fx:id="btnPickUp" layoutX="200.0" layoutY="220.0" mnemonicParsing="false" onAction="#handlePickUp" prefHeight="43.0" prefWidth="225.0" styleClass="button" text="Pick UP" />
-        <Button fx:id="btnDelivery" layoutX="200.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleDelivery" prefHeight="43.0" prefWidth="225.0" styleClass="button" text="Delivery" />
-        <Button fx:id="btnBusinessDelivery" layoutX="200.0" layoutY="340.0" mnemonicParsing="false" onAction="#handleBusinessDelivery" prefHeight="43.0" prefWidth="225.0" styleClass="button" text="Business Delivery" />
-        <Button fx:id="btnEarlyDelivery" layoutX="200.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleEarlyDelivery" prefHeight="43.0" prefWidth="225.0" styleClass="button" text="Early Delivery" />
+        <Button fx:id="btnExit" layoutX="573.0" layoutY="23.0" onAction="#exit" prefHeight="48.0" prefWidth="57.0" styleClass="button exit" text="Exit" />
     </children>
 </Pane>

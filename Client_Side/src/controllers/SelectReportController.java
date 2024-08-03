@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,9 +31,6 @@ public class SelectReportController extends AbstractController implements Initia
     @FXML
     private Button btnBack;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
-
     /*
     @Override
     public void setUser(User user) {
@@ -49,6 +46,7 @@ public class SelectReportController extends AbstractController implements Initia
     }
     */
 
+
     @FXML
     void showDetailedOrderIncomeReport(ActionEvent event) throws IOException {
     	System.out.println("my user is: "+this.currentUser.getUserName());
@@ -63,19 +61,6 @@ public class SelectReportController extends AbstractController implements Initia
     @FXML
     void goBack(ActionEvent event) throws IOException {
         navigateTo("/gui/ManagerMainMenu.fxml", "/gui/ManagerMainMenu.css", (Node) event.getSource());
-    }
-
-    @FXML
-    public void handleMousePressed(javafx.scene.input.MouseEvent event) {
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
-    }
-
-    @FXML
-    public void handleMouseDragged(javafx.scene.input.MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setX(event.getScreenX() - xOffset);
-        stage.setY(event.getScreenY() - yOffset);
     }
 
     @Override
