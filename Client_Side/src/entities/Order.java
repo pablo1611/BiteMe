@@ -1,61 +1,49 @@
 package entities;
 
-import java.util.List;
+import java.time.LocalDate;
 
 public class Order {
-    private int orderId;
-    private int customerId;
-    private List<Item> orderItems;
-    private float totalPrice;
-    private String status;
-    private String orderTime;
+    private LocalDate orderDate;
+    private String restaurant;
+    private String branch;
+    private int price;
 
-    // Getters and Setters
-    public int getOrderId() {
-        return orderId;
+    public Order(LocalDate orderDate, String restaurant, String branch, int price) {
+        this.orderDate = orderDate;
+        this.restaurant = restaurant;
+        this.branch = branch;
+        this.price = price;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public LocalDate getOrderDate() {
+        return orderDate;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public String getRestaurant() {
+        return restaurant;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public String getBranch() {
+        return branch;
     }
 
-    public List<Item> getOrderItems() {
-        return orderItems;
+    public int getPrice() {
+        return price;
     }
 
-    public void setOrderItems(List<Item> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
     }
 
-    public float getTotalPrice() {
-        return totalPrice;
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
     }
 
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(String orderTime) {
-        this.orderTime = orderTime;
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

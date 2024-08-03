@@ -64,13 +64,28 @@
             </font>
         </Label>
         <TextField fx:id="txtEmail" layoutX="200.0" layoutY="400.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <!-- Add Restaurant and Branch -->
+        <Label layoutX="60.0" layoutY="455.0" text="Restaurant">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtRestaurant" layoutX="200.0" layoutY="450.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="60.0" layoutY="505.0" text="Branch">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtBranch" layoutX="200.0" layoutY="500.0" prefHeight="25.0" prefWidth="200.0" />
         
-        <Button fx:id="btnCreate" layoutX="320.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleCreateCustomer" styleClass="main-button" text="Create">
+        <Button fx:id="btnCreate" layoutX="320.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleCreateCustomer" styleClass="main-button" text="Create">
             <font>
                 <Font name="Arial Rounded MT Bold" size="16.0" />
             </font>
         </Button>
-        <Button fx:id="btnBack" layoutX="200.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleBack" styleClass="main-button" text="Back">
+        <Button fx:id="btnBack" layoutX="200.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleBack" styleClass="main-button" text="Back">
             <font>
                 <Font name="Arial Rounded MT Bold" size="16.0" />
             </font>

@@ -36,6 +36,12 @@ public class CreateCustomerController extends AbstractController {
     private TextField txtEmail;
 
     @FXML
+    private TextField txtRestaurant;
+
+    @FXML
+    private TextField txtBranch;
+
+    @FXML
     void handleCreateCustomer(ActionEvent event) throws IOException {
         // Get the input values
         String username = txtUsername.getText();
@@ -45,6 +51,8 @@ public class CreateCustomerController extends AbstractController {
         String address = txtAddress.getText();
         String role = txtRole.getText();
         String email = txtEmail.getText();
+        String restaurant = txtRestaurant.getText();
+        String branch = txtBranch.getText();
 
         // Create a new User object
         User newUser = new User(username, password);
@@ -53,6 +61,8 @@ public class CreateCustomerController extends AbstractController {
         newUser.setAddress(address);
         newUser.setRole(role);
         newUser.setEmail(email);
+        newUser.setRestaurant(restaurant);  // Add restaurant
+        newUser.setBranch(branch);  // Add branch
         newUser.setStatus("Disconnected"); // Default status
 
         // Create a request

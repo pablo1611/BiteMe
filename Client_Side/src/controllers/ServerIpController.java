@@ -68,7 +68,7 @@ public class ServerIpController extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/Login.fxml"));
 
 		Scene scene = new Scene(root);
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 
 		primaryStage.setResizable(false);
@@ -86,9 +86,8 @@ public class ServerIpController extends Application {
 
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/gui/serverIP.css").toExternalForm());
-
 		primaryStage.setTitle("Connect to server");
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();

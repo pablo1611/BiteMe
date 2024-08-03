@@ -3,6 +3,14 @@ package common;
 public enum RequestType {
     USER_LOGIN,
     USER_LOGOUT,
+    ORDER_DETAILS,
     CREATE_USER,
+    GET_RESTAURANTS,
+    GET_MENU,
+    INSERT_ORDER_ITEMS,
+    INSERT_ORDER,
+    VIEW_INCOME_REPORT,
+    VIEW_ORDER_REPORT
+
 }
 

@@ -95,7 +95,7 @@ public class LoginController extends AbstractController {
 
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/gui/ServerIP.css").toExternalForm());
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 
@@ -182,7 +182,7 @@ public class LoginController extends AbstractController {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource(cssFile).toExternalForm());
 			Stage primaryStage = new Stage();
-			primaryStage.initStyle(StageStyle.UNDECORATED);
+			//primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setTitle("");
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);

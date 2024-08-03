@@ -15,53 +15,69 @@ import common.RequestType;
 public class Request implements Serializable {
 	private RequestType type;
 	private Object request;
-	
-	public Request() {};
-	
+	private String optionalDetail; // New field for optional details
+
+	public Request() {}
+
 	public Object getRequest() {
 		return request;
 	}
+
 	public RequestType getType() {
 		return type;
 	}
+
+	public String getOptionalDetail() {
+		return optionalDetail;
+	}
+
 	public void setRequest(Object request) {
 		this.request = request;
 	}
+
 	public void setType(RequestType type) {
 		this.type = type;
 	}
-	 @Override
-	    public String toString() {
-	        return "Request{" +
-	                "request=" + request +
-	                "type=" + type +
-	                '}';
-	    }
-	 /**
-	     * Serializes this request into a byte array for transmission or storage.
-	     * @return A byte array representing this serialized request.
-	     * @throws IOException If an I/O error occurs during serialization.
-	     */
-	public byte[] getBytes () throws IOException {
+
+	public void setOptionalDetail(String optionalDetail) {
+		this.optionalDetail = optionalDetail;
+	}
+
+	@Override
+	public String toString() {
+		return "Request{" +
+				"request=" + request +
+				"type=" + type +
+				"optionalDetail=" + optionalDetail +
+				'}';
+	}
+
+	/**
+	 * Serializes this request into a byte array for transmission or storage.
+	 * @return A byte array representing this serialized request.
+	 * @throws IOException If an I/O error occurs during serialization.
+	 */
+	// Method to serialize the object to byte array
+	public byte[] getBytes() throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(this);
-        oos.flush();
-        return bos.toByteArray();
-		 
+		ObjectOutputStream out = new ObjectOutputStream(bos);
+		out.writeObject(this);
+		out.flush();
+		return bos.toByteArray();
 	}
-	 /**
-     * Deserializes a byte array back into a Request object.
-     * 
-     * @param bytes The byte array to deserialize.
-     * @return The deserialized  Request object.
-     * @throws IOException If an I/O error occurs during deserialization.
-     * @throws ClassNotFoundException If the class of a serialized object cannot be found.
-     */
-	public static Request fromBytesToObject (byte[] bytes) throws IOException, ClassNotFoundException{
+
+	/**
+	 * Deserializes a byte array back into a Request object.
+	 *
+	 * @param bytes The byte array to deserialize.
+	 * @return The deserialized  Request object.
+	 * @throws IOException If an I/O error occurs during deserialization.
+	 * @throws ClassNotFoundException If the class of a serialized object cannot be found.
+	 */
+	// Method to deserialize byte array to object
+	public static Request fromBytesToObject(byte[] bytes) throws IOException, ClassNotFoundException {
 		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-        ObjectInputStream ois = new ObjectInputStream(bis);
-        return (Request) ois.readObject();
+		ObjectInputStream in = new ObjectInputStream(bis);
+		return (Request) in.readObject();
 	}
-	
 }

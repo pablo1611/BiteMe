@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String userName;
     private String password;
+    private int id;
     private String name;
     private String phone;
     private String address;
@@ -12,6 +13,8 @@ public class User implements Serializable {
     private String permission;
     private String email;
     private String status;
+    private String restaurant;
+    private String branch;
 
     public User(String userName, String password) {
         this.userName = userName;
@@ -28,6 +31,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -96,6 +107,22 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return userName + "," + password + "," + permission;
+    }
+
+    public String getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
 }

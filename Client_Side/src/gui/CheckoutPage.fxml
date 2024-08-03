@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="628.0" stylesheets="@CustomerDetailsPage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CheckoutPageController">
+    <children>
+        <!-- Title -->
+        <Label layoutX="114.0" layoutY="30.0" styleClass="title" text="Order Summary" />
+
+        <!-- Order Summary Table -->
+        <TableView fx:id="orderSummaryTable" layoutX="50.0" layoutY="108.0" prefHeight="200.0" prefWidth="500.0">
+            <columns>
+                <TableColumn fx:id="itemColumn" text="Item" />
+                <TableColumn fx:id="amountColumn" text="Amount" />
+                <TableColumn fx:id="priceColumn" text="Price" />
+            </columns>
+        </TableView>
+
+        <!-- Delivery Price -->
+        <Label fx:id="deliveryPriceLabel" layoutX="50.0" layoutY="310.0" styleClass="label" text="Delivery Price: $" />
+
+        <!-- Total Price -->
+        <Label fx:id="totalPriceLabel" layoutX="50.0" layoutY="340.0" styleClass="total-price" text="Total Price: $" />
+
+        <!-- Confirm Order Button -->
+        <Button fx:id="confirmOrderButton" layoutX="200.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleConfirmOrder" prefHeight="56.0" prefWidth="187.0" styleClass="button" text="Confirm Order" />
+
+        <!-- Exit Button -->
+        <Button fx:id="btnExit" layoutX="547.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" prefHeight="31.0" prefWidth="67.0" styleClass="button exit" text="Exit" />
+        
+        <Button fx:id="btnBack" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="28.0" prefWidth="67.0" styleClass="button back" text="Back" />
+    </children>
+</Pane>

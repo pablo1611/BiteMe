@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.OrderReportController" spacing="10" alignment="CENTER" padding="20">
+    <Label fx:id="lblBranchDetails" text="Order Report for Branch" style="-fx-font-size: 16px;"/>
+    <TableView fx:id="orderTable" prefWidth="600">
+        <TableColumn fx:id="colItemType" text="Item Type"/>
+        <TableColumn fx:id="colItemCount" text="Item Count"/>
+    </TableView>
+</VBox>
