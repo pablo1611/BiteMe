@@ -8,9 +8,9 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="299.0" stylesheets="@serverIP.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerIpController">
     <children>
         <Label alignment="CENTER" layoutY="83.0" prefWidth="299.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Server Connection" />
-        <Button fx:id="btnIP" layoutX="123.0" layoutY="276.0" mnemonicParsing="false" onAction="#getIP" text="submit" />
         <TextField fx:id="txtIP" layoutX="77.0" layoutY="170.0" promptText="Enter Server's IP" />
-        <Button fx:id="btnExit" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" onAction="#Exit" prefHeight="47.0" prefWidth="52.0" text="exit" />
         <TextField id="PortNumber" fx:id="txtPortNumber" layoutX="77.0" layoutY="218.0" promptText="Enter Port Number" />
+        <Button fx:id="btnIP" layoutX="123.0" layoutY="276.0" mnemonicParsing="false" onAction="#getIP" text="Submit" />
+        <Button fx:id="btnExit" layoutX="233.0" layoutY="14.0" mnemonicParsing="false" onAction="#Exit" prefHeight="47.0" prefWidth="52.0" text="Exit" />
     </children>
 </Pane>
