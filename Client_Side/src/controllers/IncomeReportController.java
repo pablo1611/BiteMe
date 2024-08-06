@@ -95,7 +95,6 @@ public class IncomeReportController extends AbstractController {
         }
     }
 
-
     @FXML
     void goBack(ActionEvent event) throws IOException {
         navigateTo("/gui/SelectReport.fxml", "/gui/SelectReport.css", (Node) event.getSource());

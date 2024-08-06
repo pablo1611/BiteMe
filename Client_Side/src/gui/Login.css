@@ -43,7 +43,7 @@
 }
 
 #btnExit{
-	-fx-background-color: rgba(0, 123, 255, 0);
+	-fx-background-color: #A1B4BB;
     -fx-background-radius: 50px;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,2,2 );
     -fx-scale-x: 1;
@@ -51,16 +51,23 @@
     -fx-transition: all 0.2s;
 }
 #btnExit:hover {
+    -fx-background-color: #EEF5FF;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 8,0,4,4 );
 }
 
 #btnBack{
-	 -fx-background-color: rgba(0, 123, 255, 0);
+	-fx-background-color: #A1B4BB;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 4,0,2,2 );
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: all 0.2s;
 }
-#btnBack:hover{
-	-fx-scale-x: 1.1;
+#btnBack:hover {
+    -fx-background-color: #EEF5FF;
+    -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.6) , 8,0,4,4 );
 }

@@ -15,7 +15,7 @@
       <Insets />
    </opaqueInsets>
    <children>
-      <ImageView fitHeight="101.0" fitWidth="96.0" layoutX="274.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="101.0" fitWidth="96.0" layoutX="277.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Login.png" />
          </image>
@@ -26,17 +26,17 @@
       <Label fx:id="lblInvalidPW" layoutX="281.0" layoutY="422.0" text="Invalid Password" textFill="#d30e0e" visible="false" />
       <Label fx:id="lblnotExist" layoutX="278.0" layoutY="442.0" text="User does not exist" textFill="#cb1515" visible="false" />
       <Label fx:id="lblconnected" layoutX="263.0" layoutY="462.0" text="User already connected" textFill="#f70202" visible="false" />
-      <Button fx:id="btnExit" layoutX="569.0" mnemonicParsing="false" onAction="#Exit" prefHeight="52.0" prefWidth="82.0" text="Exit">
+      <Button fx:id="btnExit" layoutX="521.0" layoutY="31.0" mnemonicParsing="false" onAction="#Exit" prefHeight="41.0" prefWidth="93.0" text="Exit">
          <font>
-            <Font size="52.0" />
+            <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Button id="btnBack" fx:id="btnBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Back" prefHeight="66.0" prefWidth="96.0" text="Back">
+      <Button id="btnBack" fx:id="btnBack" layoutX="33.0" layoutY="31.0" mnemonicParsing="false" onAction="#Back" prefHeight="41.0" prefWidth="93.0" text="Back">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Button>
-      <ImageView fitHeight="214.0" fitWidth="161.0" layoutX="465.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="161.0" fitWidth="173.0" layoutX="445.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BiteMe.png" />
          </image>
